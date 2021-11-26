@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:goodhealth/data/data.dart';
 import 'package:goodhealth/screens/home.dart';
+import 'package:goodhealth/screens/login.dart';
 
 class Onboarding extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _OnboardingState extends State<Onboarding> {
       height: isCurrentPage ? 10.0 : 6.0,
       width: isCurrentPage ? 10.0 : 6.0,
       decoration: BoxDecoration(
-          color: isCurrentPage ? Colors.grey : Colors.grey[300],
+          color: isCurrentPage ? Colors.blue : Colors.grey[400],
           borderRadius: BorderRadius.circular(12)),
     );
   }
@@ -37,7 +38,6 @@ class _OnboardingState extends State<Onboarding> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: PageView.builder(
-          // building the pageview to return the slidertile in here
           controller: pageController,
           itemCount: slides.length,
           onPageChanged: (val) {
@@ -60,15 +60,11 @@ class _OnboardingState extends State<Onboarding> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   GestureDetector(
-                      // Can give it a click effect with GestureDetector
                       onTap: () {
-                        // pageController.animateToPage(
-                        //     slides.length -
-                        //         1, // slides.length - 1 means if there are total n number of slides, we are calling the last end slide.
-                        //     duration: Duration(microseconds: 400),
-                        //     curve: Curves.linear);
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Home()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
                       },
                       child: Text(
                         "SKIP",
@@ -92,15 +88,15 @@ class _OnboardingState extends State<Onboarding> {
                       },
                       child: Text(
                         "NEXT",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.blue),
                       )),
                 ],
               ),
             )
           : GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               child: Container(
                 alignment: Alignment.center,

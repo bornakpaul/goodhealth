@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "848594903259",
+    "project_id": "goodhealth-92b1b",
+    "storage_bucket": "goodhealth-92b1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848594903259:android:e48d9fc732a9501c9d2cfe",
+        "android_client_info": {
+          "package_name": "com.swiftant.goodhealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848594903259-cenahrqeadoiakfblhehjc94atgh7fm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.swiftant.goodhealth",
+            "certificate_hash": "e8cd04c7b518bc600a6d170befabc67ed9518f47"
+          }
+        },
+        {
+          "client_id": "848594903259-6s7k7thuo19urtbheh4je51tepco36hv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaWmGRX2vnP-9BA45s2V0f0o7yaKh0ypk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848594903259-6s7k7thuo19urtbheh4je51tepco36hv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848594903259-l8but350vmvqin8ip7c75s3nftbvhhtt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.swiftant.goodhealth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

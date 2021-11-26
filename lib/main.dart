@@ -1,8 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goodhealth/screens/home.dart';
+import 'package:goodhealth/screens/login.dart';
 import 'package:goodhealth/screens/onboarding.dart';
 
-void main() {
+//! Changed this to not encounter error of Firebase.initializeApp()
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
