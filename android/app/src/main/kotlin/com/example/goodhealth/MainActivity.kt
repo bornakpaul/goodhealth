@@ -1,4 +1,4 @@
-package com.example.goodhealth
+package com.swiftant.goodhealth
 
 import io.flutter.embedding.android.FlutterActivity
 
