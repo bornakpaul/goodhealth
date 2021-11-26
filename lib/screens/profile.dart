@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:goodhealth/models/user_model.dart';
+import 'package:goodhealth/screens/login.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -8,6 +13,23 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //! MediaQuery sizes
@@ -18,10 +40,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: Text("Profile"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.transparent,
+          ),
+          onPressed: () {},
         ),
       ),
       body: Center(
@@ -48,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 10,
               ),
               Text(
-                'Name',
+                "${loggedInUser.firstName} ${loggedInUser.secondName}",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black54,
@@ -59,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 2,
               ),
               Text(
-                'Email ID',
+                "${loggedInUser.email}",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black54,
@@ -87,11 +110,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  onPressed: () {})
+                  onPressed: () {
+                    logout(context);
+                  })
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 }

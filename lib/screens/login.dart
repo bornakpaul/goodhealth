@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:goodhealth/screens/home.dart';
+import 'package:goodhealth/screens/profile.dart';
 import 'package:goodhealth/screens/registration.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -69,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
           return ("Password is required for login");
         }
         if (!regex.hasMatch(value)) {
-          return ("please enter valid password(min. 6 characters)");
+          return ("Enter valid password(min. 6 char)");
         }
       },
       onSaved: (value) {
@@ -189,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Home())),
+                    MaterialPageRoute(builder: (context) => ProfileScreen())),
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
