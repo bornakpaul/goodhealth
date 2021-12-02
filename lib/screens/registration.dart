@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:goodhealth/models/user_model.dart';
 import 'package:goodhealth/screens/home.dart';
 import 'package:goodhealth/screens/login.dart';
+import 'package:goodhealth/screens/mainScreen.dart';
 import 'package:goodhealth/screens/profile.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -329,7 +330,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     Fluttertoast.showToast(msg: "Account created successfully");
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => ProfileScreen()),
+        MaterialPageRoute(builder: (context) => MainScreen()),
         (route) => false);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:goodhealth/screens/home.dart';
+import 'package:goodhealth/screens/mainScreen.dart';
 import 'package:goodhealth/screens/profile.dart';
 import 'package:goodhealth/screens/registration.dart';
 
@@ -190,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => ProfileScreen())),
+                    MaterialPageRoute(builder: (context) => MainScreen())),
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
