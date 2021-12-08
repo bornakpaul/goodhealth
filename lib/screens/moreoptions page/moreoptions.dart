@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:goodhealth/data/moreinfoData.dart';
 
-class MoreInfoPage extends StatefulWidget {
-  const MoreInfoPage({Key? key}) : super(key: key);
+class MoreOptionPage extends StatefulWidget {
+  const MoreOptionPage({Key? key}) : super(key: key);
 
   @override
-  _MoreInfoPageState createState() => _MoreInfoPageState();
+  _MoreOptionPageState createState() => _MoreOptionPageState();
 }
 
-class _MoreInfoPageState extends State<MoreInfoPage> {
+class _MoreOptionPageState extends State<MoreOptionPage> {
   List<MoreInfo> moreinfoOption = [];
 
   @override

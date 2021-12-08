@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:goodhealth/models/user_model.dart';
-import 'package:goodhealth/screens/home.dart';
+import 'package:goodhealth/screens/home%20page/home.dart';
 import 'package:goodhealth/screens/login.dart';
-import 'package:goodhealth/screens/mainScreen.dart';
-import 'package:goodhealth/screens/profile.dart';
+import 'package:goodhealth/screens/mainscreen%20page/mainScreen.dart';
+import 'package:goodhealth/screens/account%20page/account.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);

@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:goodhealth/models/user_model.dart';
 import 'package:goodhealth/screens/login.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class AccountPage extends StatefulWidget {
+  const AccountPage({Key? key}) : super(key: key);
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _AccountPageState createState() => _AccountPageState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _AccountPageState extends State<AccountPage> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 

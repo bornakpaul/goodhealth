@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:goodhealth/screens/home.dart';
-import 'package:goodhealth/screens/mainScreen.dart';
-import 'package:goodhealth/screens/profile.dart';
+import 'package:goodhealth/screens/home%20page/home.dart';
+import 'package:goodhealth/screens/mainscreen%20page/mainScreen.dart';
+import 'package:goodhealth/screens/account%20page/account.dart';
 import 'package:goodhealth/screens/registration.dart';
 
 class LoginScreen extends StatefulWidget {

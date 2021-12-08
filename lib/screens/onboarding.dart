@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:goodhealth/data/data.dart';
-import 'package:goodhealth/screens/home.dart';
+import 'package:goodhealth/screens/home%20page/home.dart';
 import 'package:goodhealth/screens/login.dart';
 
 class Onboarding extends StatefulWidget {

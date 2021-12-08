@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:goodhealth/screens/home.dart';
-import 'package:goodhealth/screens/login.dart';
-import 'package:goodhealth/screens/onboarding.dart';
+import 'package:get/get.dart';
+import 'package:goodhealth/screens/mainscreen%20page/mainScreen.dart';
+import 'package:goodhealth/screens/mainscreen%20page/main_binding.dart';
 
 //! Changed this to not encounter error of Firebase.initializeApp()
 Future<void> main() async {
@@ -17,13 +17,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Good Health',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      initialRoute: "/",
+      getPages: [
+        GetPage(
+          name: "/",
+          page: () => MainScreen(),
+          binding: MainBinding(),
+        )
+      ],
     );
   }
 }
