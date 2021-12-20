@@ -1,39 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:goodhealth/screens/cart%20page/cart_controller.dart';
 
-class CartPage extends StatefulWidget {
-  const CartPage({Key? key}) : super(key: key);
+import 'widgets/cart_products.dart';
+import 'widgets/cart_total.dart';
 
-  @override
-  _CartPageState createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
+class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //! MediaQuery sizes
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    //! BUTTON
-    final addToCartButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(10.0),
-      color: Colors.blueAccent,
-      child: MaterialButton(
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-        minWidth: width,
-        onPressed: () {},
-        child: Text(
-          "Shop Now",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
+    //*
+    final CartController controller = Get.find();
 
     return Scaffold(
       appBar: AppBar(
@@ -46,27 +26,40 @@ class _CartPageState extends State<CartPage> {
           onPressed: () {},
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(36.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 250,
-                child: Image.asset(
-                  "assets/empty_cart.png",
-                  fit: BoxFit.contain,
+      body: Obx(
+        () => controller.products.length == 0
+            ? Container(
+                height: MediaQuery.of(context).size.height,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 200,
+                        child: Image.asset(
+                          "assets/empty_cart.png",
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Text('Your cart is empty'),
+                    ],
+                  ),
                 ),
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CartProducts(),
+                  SizedBox(height: 8),
+                  CartTotal(),
+                  SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Place Order"),
+                  ),
+                  SizedBox(height: 15),
+                ],
               ),
-              Text('Your cart is empty'),
-              SizedBox(
-                height: 30.0,
-              ),
-              addToCartButton,
-            ],
-          ),
-        ),
       ),
     );
   }

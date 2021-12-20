@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:goodhealth/screens/login.dart';
 import 'package:goodhealth/screens/mainscreen%20page/mainScreen.dart';
 import 'package:goodhealth/screens/mainscreen%20page/main_binding.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: "/",
-          page: () => MainScreen(),
+          page: () => LoginScreen(),
           binding: MainBinding(),
         )
       ],

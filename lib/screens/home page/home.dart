@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:goodhealth/data/dummyItemData.dart';
-import 'package:goodhealth/screens/account%20page/account.dart';
+import 'package:get/get.dart';
+import 'package:goodhealth/products/products.dart';
+import 'package:goodhealth/screens/cart%20page/cart_controller.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,15 +13,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   //! Search Controller
   TextEditingController _controller = new TextEditingController();
-
-  //! List of items
-  List<ItemModel> items = [];
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    items = getItems();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,14 +74,10 @@ class _HomeState extends State<Home> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView.builder(
-            itemCount: items.length,
+            itemCount: Product.products.length,
             itemBuilder: (context, index) {
-              return ItemCard(
-                title: items[index].title,
-                image: items[index].imagePath,
-                desc: items[index].desc,
-                quantity: items[index].quantity,
-                price: items[index].price,
+              return ProductCard(
+                index: index,
               );
             }),
       ),
@@ -97,19 +85,13 @@ class _HomeState extends State<Home> {
   }
 }
 
-class ItemCard extends StatelessWidget {
-  final String? image;
-  final String? title;
-  final String? desc;
-  final String? quantity;
-  final String? price;
-  const ItemCard({
+class ProductCard extends StatelessWidget {
+  final cartController = Get.put(CartController());
+
+  final int index;
+  ProductCard({
     Key? key,
-    this.desc,
-    this.image,
-    this.price,
-    this.quantity,
-    this.title,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -123,7 +105,10 @@ class ItemCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 150, child: Image.asset(image!)),
+            SizedBox(
+              height: 150,
+              child: Image.asset(Product.products[index].imagePath),
+            ),
             Wrap(
               children: [
                 Container(
@@ -132,28 +117,36 @@ class ItemCard extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(title!),
+                      Text(Product.products[index].title),
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(desc!),
+                      Text(Product.products[index].desc),
                       SizedBox(
                         height: 10.0,
                       ),
                       Row(
                         children: [
-                          Text(quantity!),
+                          Text(
+                              'Rs ' + Product.products[index].price.toString()),
                           SizedBox(
                             width: 10.0,
                           ),
-                          Text(price!),
+                          Text(Product.products[index].quantity.toString() +
+                              ' kg'),
                         ],
-                      )
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          cartController.addProduct(Product.products[index]);
+                        },
+                        icon: Icon(Icons.add_circle),
+                      ),
                     ],
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
