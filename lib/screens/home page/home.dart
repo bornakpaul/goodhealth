@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:goodhealth/products/products.dart';
@@ -115,32 +116,76 @@ class ProductCard extends StatelessWidget {
                   padding:
                       EdgeInsets.only(top: 15.0, bottom: 15.0, right: 15.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(Product.products[index].title),
+                      Text(
+                        Product.products[index].title,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(Product.products[index].desc),
+                      Container(
+                        width: 160,
+                        child: Text(
+                          Product.products[index].desc,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 10.0,
+                      ),
+                      Container(
+                        width: 180,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              Product.products[index].quantity.toString() +
+                                  ' kg',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              'Rs ' + Product.products[index].price.toString(),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Row(
                         children: [
-                          Text(
-                              'Rs ' + Product.products[index].price.toString()),
-                          SizedBox(
-                            width: 10.0,
+                          GestureDetector(
+                            onTap: () {
+                              cartController
+                                  .addProduct(Product.products[index]);
+                            },
+                            child: Text(
+                              'Add to cart',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
-                          Text(Product.products[index].quantity.toString() +
-                              ' kg'),
+                          IconButton(
+                            onPressed: () {
+                              cartController
+                                  .addProduct(Product.products[index]);
+                            },
+                            icon: Icon(CupertinoIcons.cart_badge_plus),
+                          ),
                         ],
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          cartController.addProduct(Product.products[index]);
-                        },
-                        icon: Icon(Icons.add_circle),
                       ),
                     ],
                   ),
