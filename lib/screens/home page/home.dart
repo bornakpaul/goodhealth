@@ -129,12 +129,20 @@ class ProductCard extends StatelessWidget {
                       SizedBox(
                         height: 10.0,
                       ),
+                      // Text(
+                      //   Product.products[index].desc,
+                      //   style: TextStyle(
+                      //     fontSize: 16,
+                      //   ),
+                      // ),
                       Container(
                         width: 160,
-                        child: Text(
-                          Product.products[index].desc,
-                          style: TextStyle(
-                            fontSize: 16,
+                        child: RichText(
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 16.0),
+                            text: Product.products[index].desc,
                           ),
                         ),
                       ),
