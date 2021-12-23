@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:goodhealth/products/products.dart';
 import 'package:goodhealth/screens/cart%20page/cart_controller.dart';
+import 'package:goodhealth/screens/product_description/product_desc.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -97,110 +98,122 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.only(
-          right: 10.0,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 150,
-              child: Image.asset(Product.products[index].imagePath),
-            ),
-            Wrap(
-              children: [
-                Container(
-                  padding:
-                      EdgeInsets.only(top: 15.0, bottom: 15.0, right: 15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        Product.products[index].title,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      // Text(
-                      //   Product.products[index].desc,
-                      //   style: TextStyle(
-                      //     fontSize: 16,
-                      //   ),
-                      // ),
-                      Container(
-                        width: 160,
-                        child: RichText(
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 16.0),
-                            text: Product.products[index].desc,
+    return GestureDetector(
+      onTap: () {
+        Get.to(ProductDescription(
+          desc: Product.products[index].desc,
+          title: Product.products[index].title,
+          imagePath: Product.products[index].imagePath,
+          quantity: Product.products[index].quantity,
+          price: Product.products[index].price,
+        ));
+      },
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.only(
+            right: 10.0,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 150,
+                child: Image.asset(Product.products[index].imagePath),
+              ),
+              Wrap(
+                children: [
+                  Container(
+                    padding:
+                        EdgeInsets.only(top: 15.0, bottom: 15.0, right: 15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          Product.products[index].title,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Container(
-                        width: 180,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              Product.products[index].quantity.toString() +
-                                  ' kg',
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        // Text(
+                        //   Product.products[index].desc,
+                        //   style: TextStyle(
+                        //     fontSize: 16,
+                        //   ),
+                        // ),
+                        Container(
+                          width: 160,
+                          child: RichText(
+                            overflow: TextOverflow.ellipsis,
+                            text: TextSpan(
                               style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                                  color: Colors.black, fontSize: 16.0),
+                              text: Product.products[index].desc,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Container(
+                          width: 180,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                Product.products[index].quantity.toString() +
+                                    ' kg',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                'Rs ' +
+                                    Product.products[index].price.toString(),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                cartController
+                                    .addProduct(Product.products[index]);
+                              },
+                              child: Text(
+                                'Add to cart',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
-                            Text(
-                              'Rs ' + Product.products[index].price.toString(),
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            IconButton(
+                              onPressed: () {
+                                cartController
+                                    .addProduct(Product.products[index]);
+                              },
+                              icon: Icon(CupertinoIcons.cart_badge_plus),
                             ),
                           ],
                         ),
-                      ),
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              cartController
-                                  .addProduct(Product.products[index]);
-                            },
-                            child: Text(
-                              'Add to cart',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              cartController
-                                  .addProduct(Product.products[index]);
-                            },
-                            icon: Icon(CupertinoIcons.cart_badge_plus),
-                          ),
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
