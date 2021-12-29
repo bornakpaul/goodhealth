@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:goodhealth/products/products.dart';
-import 'package:goodhealth/screens/cart%20page/cart_controller.dart';
+import 'package:goodhealth/screens/home%20page/home_controller.dart';
 import 'package:goodhealth/screens/product_description/product_desc.dart';
 
 class Home extends StatefulWidget {
@@ -15,6 +14,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   //! Search Controller
   TextEditingController _controller = new TextEditingController();
+
+  //* Home Controller
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,48 +50,63 @@ class _HomeState extends State<Home> {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Good Health"),
-        leading: Icon(
-          Icons.arrow_back,
-          color: Colors.transparent,
-        ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(48),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                  child: Container(
-                margin: EdgeInsets.only(left: 12.0, bottom: 8.0, right: 12.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(6.0),
-                ),
-                child: searchBar,
-              )),
-            ],
+        appBar: AppBar(
+          title: Text("Good Health"),
+          leading: Icon(
+            Icons.arrow_back,
+            color: Colors.transparent,
+          ),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(48),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                    child: Container(
+                  margin: EdgeInsets.only(left: 12.0, bottom: 8.0, right: 12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+                  child: searchBar,
+                )),
+              ],
+            ),
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView.builder(
-            itemCount: Product.products.length,
-            itemBuilder: (context, index) {
-              return ProductCard(
-                index: index,
-              );
-            }),
-      ),
-    );
+        body: Obx(
+          () => Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: homeController.isLoading == true
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text("Loading ...")
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: homeController.productList.length,
+                    itemBuilder: (context, index) {
+                      return ProductCard(
+                        index: index,
+                      );
+                      //return Container(height: 20, width: 100, color: Colors.red);
+                    }),
+          ),
+        ));
   }
 }
 
 class ProductCard extends StatelessWidget {
-  final cartController = Get.put(CartController());
-
+  // final cartController = Get.put(CartController());
+  final homeController = Get.put(HomeController());
   final int index;
   ProductCard({
     Key? key,
@@ -101,15 +118,12 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(ProductDescription(
-          desc: Product.products[index].desc,
-          title: Product.products[index].title,
-          imagePath: Product.products[index].imagePath,
-          quantity: Product.products[index].quantity,
-          price: Product.products[index].price,
+          productID: homeController.productList[index]['productID'],
         ));
       },
       child: Card(
         child: Container(
+          margin: EdgeInsets.only(left: 10, right: 10),
           padding: EdgeInsets.only(
             right: 10.0,
           ),
@@ -117,10 +131,6 @@ class ProductCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 150,
-                child: Image.asset(Product.products[index].imagePath),
-              ),
               Wrap(
                 children: [
                   Container(
@@ -131,7 +141,7 @@ class ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          Product.products[index].title,
+                          homeController.productList[index]['productTitle'],
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -140,20 +150,15 @@ class ProductCard extends StatelessWidget {
                         SizedBox(
                           height: 10.0,
                         ),
-                        // Text(
-                        //   Product.products[index].desc,
-                        //   style: TextStyle(
-                        //     fontSize: 16,
-                        //   ),
-                        // ),
                         Container(
-                          width: 160,
+                          width: 300,
                           child: RichText(
                             overflow: TextOverflow.ellipsis,
                             text: TextSpan(
                               style: TextStyle(
                                   color: Colors.black, fontSize: 16.0),
-                              text: Product.products[index].desc,
+                              text: homeController.productList[index]
+                                  ['productDescription'],
                             ),
                           ),
                         ),
@@ -161,21 +166,34 @@ class ProductCard extends StatelessWidget {
                           height: 10.0,
                         ),
                         Container(
-                          width: 180,
+                          width: 300,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              homeController.productList[index]
+                                          ['productContainQuantity'] !=
+                                      null
+                                  ? Text(
+                                      'Qty: ' +
+                                          homeController.productList[index]
+                                              ['productContainQuantity'],
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                  : Text(
+                                      "Qty: 0",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                               Text(
-                                Product.products[index].quantity.toString() +
-                                    ' kg',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                'Rs ' +
-                                    Product.products[index].price.toString(),
+                                'Price: Rs ' +
+                                    homeController.productList[index]
+                                            ['actualPrice']
+                                        .toString(),
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -188,8 +206,8 @@ class ProductCard extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                cartController
-                                    .addProduct(Product.products[index]);
+                                // cartController
+                                //     .addProduct(Product.products[index]);
                               },
                               child: Text(
                                 'Add to cart',
@@ -200,8 +218,8 @@ class ProductCard extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                cartController
-                                    .addProduct(Product.products[index]);
+                                // cartController
+                                //     .addProduct(Product.products[index]);
                               },
                               icon: Icon(CupertinoIcons.cart_badge_plus),
                             ),

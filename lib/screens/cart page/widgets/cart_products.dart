@@ -17,7 +17,7 @@ class CartProducts extends StatelessWidget {
               return CartProductCard(
                 controller: controller,
                 index: index,
-                product: controller.products.keys.toList()[index],
+                // product: controller.products.keys.toList()[index],
                 quantity: controller.products.values.toList()[index],
               );
             }),
@@ -28,14 +28,14 @@ class CartProducts extends StatelessWidget {
 
 class CartProductCard extends StatelessWidget {
   final CartController controller;
-  final Product product;
+  //final Product product;
   final int quantity;
   final int index;
   const CartProductCard({
     Key? key,
     required this.controller,
     required this.index,
-    required this.product,
+    // required this.product,
     required this.quantity,
   }) : super(key: key);
 
@@ -52,23 +52,23 @@ class CartProductCard extends StatelessWidget {
           CircleAvatar(
             radius: 35,
             backgroundColor: Colors.transparent,
-            backgroundImage: AssetImage(product.imagePath),
+            // backgroundImage: AssetImage(product.imagePath),
           ),
           SizedBox(
             width: 10.0,
           ),
-          Expanded(
-            child: Text(
-              product.title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+          // Expanded(
+          //   child: Text(
+          //     product.title,
+          //     style: TextStyle(
+          //       fontSize: 16,
+          //       fontWeight: FontWeight.w600,
+          //     ),
+          //   ),
+          // ),
           IconButton(
             onPressed: () {
-              controller.removeProduct(product);
+              //controller.removeProduct(product);
             },
             icon: Icon(Icons.remove_circle),
           ),
@@ -82,7 +82,7 @@ class CartProductCard extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              controller.addProduct(product);
+              // controller.addProduct(product);
             },
             icon: Icon(Icons.add_circle),
           ),

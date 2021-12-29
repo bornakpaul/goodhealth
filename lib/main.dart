@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: "/",
-          page: () => LoginScreen(),
+          page: () => MainScreen(),
           binding: MainBinding(),
         )
       ],

@@ -3,19 +3,12 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 
 class ProductDescription extends StatelessWidget {
-  final String imagePath;
-  final String title;
-  final String desc;
-  final int quantity;
-  final double price;
+  // final String imagePath;
+  final String productID;
 
   const ProductDescription({
     Key? key,
-    required this.desc,
-    required this.imagePath,
-    required this.quantity,
-    required this.title,
-    required this.price,
+    required this.productID,
   }) : super(key: key);
 
   @override
@@ -23,7 +16,7 @@ class ProductDescription extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          title,
+          "title",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -35,10 +28,10 @@ class ProductDescription extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SizedBox(
-                height: 250,
-                child: Image.asset(imagePath),
-              ),
+              // SizedBox(
+              //   height: 250,
+              //   child: Image.asset(imagePath),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -47,7 +40,7 @@ class ProductDescription extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '₹' + price.toString(),
+                          '₹ price',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -58,7 +51,7 @@ class ProductDescription extends StatelessWidget {
                           width: 10.0,
                         ),
                         Text(
-                          '(' + quantity.toString() + 'kg)',
+                          "Qty: 2kg",
                           style: TextStyle(fontSize: 20),
                         ),
                       ],
@@ -77,7 +70,7 @@ class ProductDescription extends StatelessWidget {
                       height: 10.0,
                     ),
                     Text(
-                      desc,
+                      "Long desc",
                       style: TextStyle(
                         fontSize: 16,
                       ),

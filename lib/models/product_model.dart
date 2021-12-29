@@ -10,18 +10,18 @@ String productToJson(Product data) => json.encode(data.toJson());
 
 class Product {
   Product({
-    required this.rcode,
-    required this.rObj,
-    required this.rmsg,
-    required this.reqId,
-    required this.trnId,
+    this.rcode,
+    this.rObj,
+    this.rmsg,
+    this.reqId,
+    this.trnId,
   });
 
-  int rcode;
-  RObj rObj;
-  List<Rmsg> rmsg;
-  String reqId;
-  dynamic trnId;
+  int? rcode;
+  RObj? rObj;
+  List<Rmsg>? rmsg;
+  String? reqId;
+  dynamic? trnId;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         rcode: json["rcode"],
@@ -33,8 +33,8 @@ class Product {
 
   Map<String, dynamic> toJson() => {
         "rcode": rcode,
-        "rObj": rObj.toJson(),
-        "rmsg": List<dynamic>.from(rmsg.map((x) => x.toJson())),
+        "rObj": rObj!.toJson(),
+        "rmsg": List<dynamic>.from(rmsg!.map((x) => x.toJson())),
         "reqID": reqId,
         "trnID": trnId,
       };
@@ -60,25 +60,25 @@ class RObj {
 
 class GetAllProduct {
   GetAllProduct({
-    required this.productId,
-    required this.productTitle,
-    required this.productDescription,
-    required this.productContainQuantity,
-    required this.actualPrice,
+    this.productId,
+    this.productTitle,
+    this.productDescription,
+    this.productContainQuantity,
+    this.actualPrice,
   });
 
-  String productId;
-  String productTitle;
-  String productDescription;
-  String productContainQuantity;
-  int actualPrice;
+  String? productId;
+  String? productTitle;
+  String? productDescription;
+  String? productContainQuantity;
+  double? actualPrice;
 
   factory GetAllProduct.fromJson(Map<String, dynamic> json) => GetAllProduct(
         productId: json["productID"],
         productTitle: json["productTitle"],
         productDescription: json["productDescription"],
         productContainQuantity: json["productContainQuantity"] == null
-            ? null
+            ? ''
             : json["productContainQuantity"],
         actualPrice: json["actualPrice"],
       );
@@ -95,14 +95,14 @@ class GetAllProduct {
 
 class Rmsg {
   Rmsg({
-    required this.errorText,
-    required this.errorCode,
+    this.errorText,
+    this.errorCode,
     this.fieldName,
     this.fieldValue,
   });
 
-  String errorText;
-  String errorCode;
+  String? errorText;
+  String? errorCode;
   dynamic fieldName;
   dynamic fieldValue;
 
