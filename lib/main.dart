@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:goodhealth/screens/login.dart';
-import 'package:goodhealth/screens/mainscreen%20page/mainScreen.dart';
+
+import 'package:goodhealth/screens/login_registration/phone_number/phoneAuthentication.dart';
+
 import 'package:goodhealth/screens/mainscreen%20page/main_binding.dart';
 
 //! Changed this to not encounter error of Firebase.initializeApp()
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: "/",
-          page: () => MainScreen(),
+          page: () => PhoneAuthentication(),
           binding: MainBinding(),
         )
       ],

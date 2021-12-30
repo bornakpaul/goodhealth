@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:goodhealth/services/remote_services.dart';
+import 'package:goodhealth/services/api_services.dart';
 
 class HomeController extends GetxController {
   var productList = [].obs;
@@ -14,7 +14,7 @@ class HomeController extends GetxController {
   void fetchProduct() async {
     try {
       isLoading(true);
-      var products = await RemoteServices.fetchProducts();
+      var products = await ProductApiService.fetchProducts();
       if (products != null) {
         productList.value = products;
         print(products);

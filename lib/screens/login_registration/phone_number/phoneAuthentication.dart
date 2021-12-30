@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:goodhealth/screens/login_registration/phone_number/otpAuthentication.dart';
+import 'package:goodhealth/screens/login_registration/phone_number/phone_Auth_controller.dart';
+import 'package:goodhealth/services/api_services.dart';
+import 'package:http/http.dart' as http;
 
 class PhoneAuthentication extends StatefulWidget {
   const PhoneAuthentication({Key, key}) : super(key: key);
@@ -9,6 +15,13 @@ class PhoneAuthentication extends StatefulWidget {
 }
 
 class _PhoneAuthenticationState extends State<PhoneAuthentication> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    //PhoneApiService();
+    super.initState();
+  }
+
   //* editing controller
   final TextEditingController phoneController = new TextEditingController();
 
@@ -22,19 +35,8 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
           padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: 32,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
               SizedBox(
-                height: 18,
+                height: 38,
               ),
               Container(
                 width: 200,
@@ -113,6 +115,10 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                          //* Initializing the controller
+                          final phoneNumber = phoneController.text;
+                          PhoneAuthController phoneAuthController = Get.put(
+                              PhoneAuthController(phoneNumber: phoneNumber));
                           Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (context) => OtpAuthentication()),

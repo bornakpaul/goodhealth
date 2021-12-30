@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:goodhealth/screens/home%20page/home_controller.dart';
 import 'package:goodhealth/screens/product_description/product_desc.dart';
+import 'package:goodhealth/screens/product_description/product_desc_controller.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,6 +18,8 @@ class _HomeState extends State<Home> {
 
   //* Home Controller
   final HomeController homeController = Get.put(HomeController());
+  final ProductDescController productDescController =
+      Get.put(ProductDescController());
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +120,10 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(ProductDescription(
-          productID: homeController.productList[index]['productID'],
-        ));
+        Get.to(() => ProductDescription(
+              index: index,
+              productID: homeController.productList[index]['productID'],
+            ));
       },
       child: Card(
         child: Container(

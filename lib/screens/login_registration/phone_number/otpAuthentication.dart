@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:goodhealth/screens/login_registration/phone_number/otp_Auth_controller.dart';
+import 'package:goodhealth/screens/login_registration/phone_number/phone_Auth_controller.dart';
+import 'package:goodhealth/screens/mainscreen%20page/mainScreen.dart';
 
 class OtpAuthentication extends StatefulWidget {
   const OtpAuthentication({Key, key}) : super(key: key);
@@ -13,6 +18,11 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
   final TextEditingController otpController2 = new TextEditingController();
   final TextEditingController otpController3 = new TextEditingController();
   final TextEditingController otpController4 = new TextEditingController();
+  final TextEditingController otpController5 = new TextEditingController();
+  final TextEditingController otpController6 = new TextEditingController();
+
+  //*
+  PhoneAuthController phoneAuthController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +31,7 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
       backgroundColor: Color(0xfff7f6fb),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
           child: Column(
             children: [
               Align(
@@ -75,7 +85,7 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
                 height: 28,
               ),
               Container(
-                padding: EdgeInsets.all(28),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -99,8 +109,16 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
                             controller: otpController3),
                         _textFieldOTP(
                             first: false,
-                            last: true,
+                            last: false,
                             controller: otpController4),
+                        _textFieldOTP(
+                            first: false,
+                            last: false,
+                            controller: otpController5),
+                        _textFieldOTP(
+                            first: false,
+                            last: true,
+                            controller: otpController6),
                       ],
                     ),
                     SizedBox(
@@ -109,11 +127,21 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
-                          print(otpController1.text +
+                        onPressed: () async {
+                          final int fullOTP = int.parse(otpController1.text +
                               otpController2.text +
                               otpController3.text +
-                              otpController4.text);
+                              otpController4.text +
+                              otpController5.text +
+                              otpController6.text);
+                          OTPAuthController otpAuthController =
+                              Get.put(OTPAuthController(
+                            otp: fullOTP,
+                            sessionId: phoneAuthController
+                                .phoneSession['oTPSessionID'],
+                          ));
+
+                          login();
                         },
                         style: ButtonStyle(
                           foregroundColor:
@@ -175,9 +203,9 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
       required bool last,
       required TextEditingController controller}) {
     return Container(
-      height: 85,
+      height: 60,
       child: AspectRatio(
-        aspectRatio: 0.7,
+        aspectRatio: 0.8,
         child: TextField(
           controller: controller,
           autofocus: true,
@@ -208,4 +236,18 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
       ),
     );
   }
+}
+
+login() async {
+  OTPAuthController otpAuthController = Get.find();
+  Fluttertoast.showToast(msg: "Verifing...");
+  await Future.delayed(const Duration(seconds: 6), () {
+    if (otpAuthController.otpSession['token'] != null) {
+      Get.to(MainScreen());
+      Fluttertoast.showToast(msg: "Successfully verified");
+    } else {
+      Fluttertoast.showToast(msg: "OTP verification failed");
+      Get.back();
+    }
+  });
 }
