@@ -13,7 +13,7 @@ class ProductApiService {
       Map<String, dynamic> data =
           new Map<String, dynamic>.from(json.decode(response.body));
       //List<dynamic> newData = data['rObj'];
-      print(data['rObj']['getAllProduct']);
+      //print(data['rObj']['getAllProduct']);
       //print(newData);
       return data['rObj']['getAllProduct'];
     } else {
@@ -28,9 +28,9 @@ class ProductDescApiService {
   static String url =
       "https://api-goodhealth.swiftant.com/api/product/getproduct";
 
-  static fetchProductDesc() async {
+  static fetchProductDesc(String productID) async {
     Map id = {
-      "productID": "b8e594ac-a6ee-40a6-a1a0-ed3b546366e4",
+      "productID": productID,
     };
     //* encode map to json
     var body = json.encode(id);

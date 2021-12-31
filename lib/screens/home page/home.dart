@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:goodhealth/screens/cart%20page/cart_controller.dart';
 import 'package:goodhealth/screens/home%20page/home_controller.dart';
 import 'package:goodhealth/screens/product_description/product_desc.dart';
 import 'package:goodhealth/screens/product_description/product_desc_controller.dart';
@@ -18,8 +19,6 @@ class _HomeState extends State<Home> {
 
   //* Home Controller
   final HomeController homeController = Get.put(HomeController());
-  final ProductDescController productDescController =
-      Get.put(ProductDescController());
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +107,9 @@ class _HomeState extends State<Home> {
 }
 
 class ProductCard extends StatelessWidget {
-  // final cartController = Get.put(CartController());
+  final cartController = Get.put(CartController());
   final homeController = Get.put(HomeController());
+
   final int index;
   ProductCard({
     Key? key,
@@ -120,6 +120,9 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        // final ProductDescController productDescController = Get.put(
+        //     ProductDescController(
+        //         productId: homeController.productList[index]['productID']));
         Get.to(() => ProductDescription(
               index: index,
               productID: homeController.productList[index]['productID'],
@@ -210,8 +213,8 @@ class ProductCard extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // cartController
-                                //     .addProduct(Product.products[index]);
+                                // cartController.addProduct(
+                                //     homeController.productList[index]);
                               },
                               child: Text(
                                 'Add to cart',
@@ -222,8 +225,16 @@ class ProductCard extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                // cartController
-                                //     .addProduct(Product.products[index]);
+                                // final ProductDescController
+                                //     productDescController =
+                                //     Get.put(ProductDescController(
+                                //         productId:
+                                //             'b8e594ac-a6ee-40a6-a1a0-ed3b546366e4'));
+                                cartController.addProduct(
+                                    homeController.productList[index]);
+                                //print(homeController.productList[index]);
+                                //print(homeController.productMapList[index]);
+                                print(homeController.productList[index]);
                               },
                               icon: Icon(CupertinoIcons.cart_badge_plus),
                             ),

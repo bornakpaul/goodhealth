@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:goodhealth/screens/login_registration/phone_number/otpAuthentication.dart';
 import 'package:goodhealth/screens/login_registration/phone_number/phone_Auth_controller.dart';
-import 'package:goodhealth/services/api_services.dart';
 import 'package:http/http.dart' as http;
 
 class PhoneAuthentication extends StatefulWidget {

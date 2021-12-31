@@ -78,7 +78,7 @@ class GetAllProduct {
         productTitle: json["productTitle"],
         productDescription: json["productDescription"],
         productContainQuantity: json["productContainQuantity"] == null
-            ? ''
+            ? '0'
             : json["productContainQuantity"],
         actualPrice: json["actualPrice"],
       );
@@ -88,7 +88,7 @@ class GetAllProduct {
         "productTitle": productTitle,
         "productDescription": productDescription,
         "productContainQuantity":
-            productContainQuantity == null ? null : productContainQuantity,
+            productContainQuantity == null ? '0' : productContainQuantity,
         "actualPrice": actualPrice,
       };
 }

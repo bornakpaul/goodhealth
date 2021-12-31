@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:goodhealth/screens/mainscreen%20page/mainScreen.dart';
 import 'package:goodhealth/screens/registration.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,9 +16,6 @@ class _LoginScreenState extends State<LoginScreen> {
   //! editing controller
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
-
-  //! firebase
-  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -95,10 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         minWidth: width,
         onPressed: () {
-          signIn(
-            emailController.text,
-            passwordController.text,
-          );
+          //
         },
         child: Text(
           "Login",
@@ -179,21 +170,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  //! login function
-  void signIn(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => MainScreen())),
-              })
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
   }
 }

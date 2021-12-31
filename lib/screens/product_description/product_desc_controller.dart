@@ -5,7 +5,9 @@ class ProductDescController extends GetxController {
   //var productDescList = [].obs;
   var productDescList = Map().obs;
   var isLoading = true.obs;
-  // final String productId;
+  final String productId;
+
+  ProductDescController({required this.productId});
 
   @override
   void onInit() {
@@ -16,7 +18,7 @@ class ProductDescController extends GetxController {
   void fetchProductDesc() async {
     try {
       isLoading(true);
-      var productDesc = await ProductDescApiService.fetchProductDesc();
+      var productDesc = await ProductDescApiService.fetchProductDesc(productId);
       if (productDesc != null) {
         productDescList.value = productDesc;
         print(productDesc);

@@ -7,7 +7,7 @@ class ProductDescription extends StatelessWidget {
   // final String imagePath;
   final int index;
   final String productID;
-  final ProductDescController productDescController = Get.find();
+
   final HomeController homeController = Get.find();
 
   ProductDescription({
@@ -18,6 +18,9 @@ class ProductDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProductDescController productDescController =
+        Get.put(ProductDescController(productId: productID));
+    //*
     return Scaffold(
       appBar: AppBar(
         title: Container(

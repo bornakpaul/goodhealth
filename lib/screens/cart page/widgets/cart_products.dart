@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:goodhealth/products/products.dart';
+import 'package:goodhealth/models/product_model.dart';
 import 'package:goodhealth/screens/cart%20page/cart_controller.dart';
 
 class CartProducts extends StatelessWidget {
@@ -17,7 +17,7 @@ class CartProducts extends StatelessWidget {
               return CartProductCard(
                 controller: controller,
                 index: index,
-                // product: controller.products.keys.toList()[index],
+                product: controller.products.keys.toList()[index],
                 quantity: controller.products.values.toList()[index],
               );
             }),
@@ -28,14 +28,14 @@ class CartProducts extends StatelessWidget {
 
 class CartProductCard extends StatelessWidget {
   final CartController controller;
-  //final Product product;
+  final GetAllProduct product;
   final int quantity;
   final int index;
   const CartProductCard({
     Key? key,
     required this.controller,
     required this.index,
-    // required this.product,
+    required this.product,
     required this.quantity,
   }) : super(key: key);
 
@@ -57,18 +57,18 @@ class CartProductCard extends StatelessWidget {
           SizedBox(
             width: 10.0,
           ),
-          // Expanded(
-          //   child: Text(
-          //     product.title,
-          //     style: TextStyle(
-          //       fontSize: 16,
-          //       fontWeight: FontWeight.w600,
-          //     ),
-          //   ),
-          // ),
+          Expanded(
+            child: Text(
+              product.productTitle!,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
           IconButton(
             onPressed: () {
-              //controller.removeProduct(product);
+              controller.removeProduct(product);
             },
             icon: Icon(Icons.remove_circle),
           ),
@@ -82,7 +82,7 @@ class CartProductCard extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              // controller.addProduct(product);
+              controller.addProduct(product);
             },
             icon: Icon(Icons.add_circle),
           ),
