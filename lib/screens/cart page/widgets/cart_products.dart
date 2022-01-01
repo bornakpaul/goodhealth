@@ -49,11 +49,6 @@ class CartProductCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CircleAvatar(
-            radius: 35,
-            backgroundColor: Colors.transparent,
-            // backgroundImage: AssetImage(product.imagePath),
-          ),
           SizedBox(
             width: 10.0,
           ),

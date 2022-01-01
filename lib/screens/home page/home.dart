@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:goodhealth/models/product_model.dart';
 import 'package:goodhealth/screens/cart%20page/cart_controller.dart';
 import 'package:goodhealth/screens/home%20page/home_controller.dart';
 import 'package:goodhealth/screens/product_description/product_desc.dart';
@@ -125,7 +126,7 @@ class ProductCard extends StatelessWidget {
         //         productId: homeController.productList[index]['productID']));
         Get.to(() => ProductDescription(
               index: index,
-              productID: homeController.productList[index]['productID'],
+              productID: homeController.productList[index].productId!,
             ));
       },
       child: Card(
@@ -148,7 +149,7 @@ class ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          homeController.productList[index]['productTitle'],
+                          homeController.productList[index].productTitle!,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -164,8 +165,8 @@ class ProductCard extends StatelessWidget {
                             text: TextSpan(
                               style: TextStyle(
                                   color: Colors.black, fontSize: 16.0),
-                              text: homeController.productList[index]
-                                  ['productDescription'],
+                              text: homeController
+                                  .productList[index].productDescription,
                             ),
                           ),
                         ),
@@ -178,12 +179,12 @@ class ProductCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               homeController.productList[index]
-                                          ['productContainQuantity'] !=
+                                          .productContainQuantity !=
                                       null
                                   ? Text(
                                       'Qty: ' +
                                           homeController.productList[index]
-                                              ['productContainQuantity'],
+                                              .productContainQuantity!,
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
@@ -198,8 +199,8 @@ class ProductCard extends StatelessWidget {
                                     ),
                               Text(
                                 'Price: Rs ' +
-                                    homeController.productList[index]
-                                            ['actualPrice']
+                                    homeController
+                                        .productList[index].actualPrice
                                         .toString(),
                                 style: TextStyle(
                                   fontSize: 16,
@@ -213,8 +214,8 @@ class ProductCard extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // cartController.addProduct(
-                                //     homeController.productList[index]);
+                                cartController.addProduct(
+                                    homeController.productList[index]);
                               },
                               child: Text(
                                 'Add to cart',
@@ -225,16 +226,22 @@ class ProductCard extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
+                                //print()
+                                cartController.addProduct(
+                                    homeController.productList[index]);
+                                print(homeController.productList[index]);
+                                // cartController.newProducts[index]['productID'];
                                 // final ProductDescController
                                 //     productDescController =
                                 //     Get.put(ProductDescController(
                                 //         productId:
                                 //             'b8e594ac-a6ee-40a6-a1a0-ed3b546366e4'));
-                                cartController.addProduct(
-                                    homeController.productList[index]);
+                                // cartController.addProduct(
+                                //     homeController.productList[index]);
                                 //print(homeController.productList[index]);
                                 //print(homeController.productMapList[index]);
-                                print(homeController.productList[index]);
+                                // print(cartController.newProducts[index]
+                                //     ['productID']);
                               },
                               icon: Icon(CupertinoIcons.cart_badge_plus),
                             ),

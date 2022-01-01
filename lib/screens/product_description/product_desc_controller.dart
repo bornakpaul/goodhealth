@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
+import 'package:goodhealth/models/product_desc_model.dart';
 import 'package:goodhealth/services/api_services.dart';
 
 class ProductDescController extends GetxController {
-  //var productDescList = [].obs;
-  var productDescList = Map().obs;
+  var productDescList = <GetProduct>[].obs;
+  //var productDescList = Map().obs;
   var isLoading = true.obs;
   final String productId;
 

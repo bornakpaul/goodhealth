@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:goodhealth/models/product_model.dart';
 import 'package:http/http.dart' as http;
 
 class ProductApiService {
@@ -9,13 +10,17 @@ class ProductApiService {
   static fetchProducts() async {
     var response = await client.post(Uri.parse(url));
     if (response.statusCode == 200) {
-      //var jsonString = response.body;
-      Map<String, dynamic> data =
-          new Map<String, dynamic>.from(json.decode(response.body));
+      var jsonString = json.decode(response.body);
+      final data = jsonString['rObj']['getAllProduct'] as List;
+
+      // Map<String, dynamic> data =
+      //     new Map<String, dynamic>.from(json.decode(response.body));
+      // List<dynamic> newData = data['rObj']['getAllProduct'];
       //List<dynamic> newData = data['rObj'];
-      //print(data['rObj']['getAllProduct']);
       //print(newData);
-      return data['rObj']['getAllProduct'];
+      //print(newData);
+      //print(data.map((newdata) => GetAllProduct.fromJson(newdata)).toList());
+      return data.map((newdata) => GetAllProduct.fromJson(newdata)).toList();
     } else {
       //print(response.body);
       return List.empty();
@@ -40,14 +45,17 @@ class ProductDescApiService {
       body: body,
     );
     if (response.statusCode == 200) {
-      //var jsonString = response.body;
-      Map<String, dynamic> data =
-          new Map<String, dynamic>.from(json.decode(response.body));
+      var jsonString = json.decode(response.body);
+      final data = jsonString['rObj']['getProduct'] as List;
+      // Map<String, dynamic> data =
+      //     new Map<String, dynamic>.from(json.decode(response.body));
 
       //List<dynamic> newData = data['rObj'];
-      print(data['rObj']['getProduct']);
+      //print(data['rObj']['getProduct']);
       //print(newData);
-      return data['rObj']['getProduct'];
+      //return data['rObj']['getProduct'];
+      //print(data.map((newdata) => GetAllProduct.fromJson(newdata)).toList());
+      return data.map((newdata) => GetAllProduct.fromJson(newdata)).toList();
     } else {
       //print(response.body);
       return List.empty();

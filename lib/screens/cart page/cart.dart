@@ -8,12 +8,8 @@ import 'widgets/cart_total.dart';
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //! MediaQuery sizes
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-
     //*
-    final CartController controller = Get.find();
+    final CartController controller = Get.put(CartController());
 
     return Scaffold(
       appBar: AppBar(

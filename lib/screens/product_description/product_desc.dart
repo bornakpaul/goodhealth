@@ -32,7 +32,7 @@ class ProductDescription extends StatelessWidget {
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
               ),
-              text: homeController.productList[index]['productTitle'],
+              text: homeController.productList[index].productTitle,
             ),
           ),
         ),
@@ -40,7 +40,7 @@ class ProductDescription extends StatelessWidget {
       body: SingleChildScrollView(
         child: Body(
           index: index,
-          productId: homeController.productList[index]['productID'],
+          productId: homeController.productList[index].productId!,
         ),
       ),
     );
@@ -70,7 +70,7 @@ class Body extends StatelessWidget {
                   children: [
                     Text(
                       'Price: Rs ' +
-                          homeController.productList[index]['actualPrice']
+                          homeController.productList[index].actualPrice
                               .toString(),
                       style: TextStyle(
                         fontSize: 20,
@@ -81,14 +81,13 @@ class Body extends StatelessWidget {
                     SizedBox(
                       width: 10.0,
                     ),
-                    homeController.productList[index]
-                                ['productContainQuantity'] ==
+                    homeController.productList[index].productContainQuantity ==
                             null
                         ? Text("Qty: 0", style: TextStyle(fontSize: 20))
                         : Text(
                             "Qty: " +
-                                homeController.productList[index]
-                                    ['productContainQuantity'],
+                                homeController
+                                    .productList[index].productContainQuantity!,
                             style: TextStyle(fontSize: 20),
                           ),
                   ],
@@ -107,7 +106,7 @@ class Body extends StatelessWidget {
                   height: 10.0,
                 ),
                 Text(
-                  homeController.productList[index]['productDescription'],
+                  homeController.productList[index].productDescription!,
                   style: TextStyle(
                     fontSize: 16,
                   ),

@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:goodhealth/models/product_model.dart';
 import 'package:goodhealth/services/api_services.dart';
 
 class HomeController extends GetxController {
-  var productList = [].obs;
+  var productList = <GetAllProduct>[].obs;
   var isLoading = true.obs;
   //var productMapList = Map().obs;
 
