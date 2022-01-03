@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:goodhealth/models/product_model.dart';
+import 'package:goodhealth/products/product_controller.dart';
 import 'package:goodhealth/screens/cart%20page/cart_controller.dart';
 import 'package:goodhealth/screens/home%20page/home_controller.dart';
 import 'package:goodhealth/screens/product_description/product_desc.dart';
@@ -119,15 +120,24 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductDescController productDescController = Get.put(ProductDescController(
+        productId: homeController.productList[index].productId!));
     return GestureDetector(
-      onTap: () {
-        // final ProductDescController productDescController = Get.put(
-        //     ProductDescController(
-        //         productId: homeController.productList[index]['productID']));
-        Get.to(() => ProductDescription(
-              index: index,
-              productID: homeController.productList[index].productId!,
-            ));
+      onTap: () async {
+        ProductDescController productDescController = Get.find();
+        if (productDescController.productDescList['productID'] != null) {
+          Get.to(() => ProductDescription(
+                index: index,
+                productID: homeController.productList[index].productId!,
+              ));
+        } else {
+          await Future.delayed(const Duration(milliseconds: 400), () {
+            Get.to(() => ProductDescription(
+                  index: index,
+                  productID: homeController.productList[index].productId!,
+                ));
+          });
+        }
       },
       child: Card(
         child: Container(
@@ -230,18 +240,6 @@ class ProductCard extends StatelessWidget {
                                 cartController.addProduct(
                                     homeController.productList[index]);
                                 print(homeController.productList[index]);
-                                // cartController.newProducts[index]['productID'];
-                                // final ProductDescController
-                                //     productDescController =
-                                //     Get.put(ProductDescController(
-                                //         productId:
-                                //             'b8e594ac-a6ee-40a6-a1a0-ed3b546366e4'));
-                                // cartController.addProduct(
-                                //     homeController.productList[index]);
-                                //print(homeController.productList[index]);
-                                //print(homeController.productMapList[index]);
-                                // print(cartController.newProducts[index]
-                                //     ['productID']);
                               },
                               icon: Icon(CupertinoIcons.cart_badge_plus),
                             ),

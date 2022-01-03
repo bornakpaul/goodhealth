@@ -69,8 +69,8 @@ class Body extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Price: Rs ' +
-                          homeController.productList[index].actualPrice
+                      '₹' +
+                          productDescController.productDescList['actualprice']
                               .toString(),
                       style: TextStyle(
                         fontSize: 20,
@@ -79,17 +79,23 @@ class Body extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '₹' +
+                          productDescController.productDescList['mrp']
+                              .toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                        decorationColor: Colors.red,
+                      ),
+                    ),
+                    SizedBox(
                       width: 10.0,
                     ),
-                    homeController.productList[index].productContainQuantity ==
-                            null
-                        ? Text("Qty: 0", style: TextStyle(fontSize: 20))
-                        : Text(
-                            "Qty: " +
-                                homeController
-                                    .productList[index].productContainQuantity!,
-                            style: TextStyle(fontSize: 20),
-                          ),
                   ],
                 ),
                 SizedBox(
@@ -106,7 +112,7 @@ class Body extends StatelessWidget {
                   height: 10.0,
                 ),
                 Text(
-                  homeController.productList[index].productDescription!,
+                  productDescController.productDescList['productdescription'],
                   style: TextStyle(
                     fontSize: 16,
                   ),

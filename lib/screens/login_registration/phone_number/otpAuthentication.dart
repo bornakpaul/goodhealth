@@ -21,7 +21,7 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
   final TextEditingController otpController5 = new TextEditingController();
   final TextEditingController otpController6 = new TextEditingController();
 
-  //*
+  //* controller
   PhoneAuthController phoneAuthController = Get.find();
 
   @override
@@ -241,7 +241,7 @@ class _OtpAuthenticationState extends State<OtpAuthentication> {
 login() async {
   OTPAuthController otpAuthController = Get.find();
   Fluttertoast.showToast(msg: "Verifing...");
-  await Future.delayed(const Duration(seconds: 6), () {
+  await Future.delayed(const Duration(seconds: 8), () {
     if (otpAuthController.otpSession['token'] != null) {
       Get.to(MainScreen());
       Fluttertoast.showToast(msg: "Successfully verified");
